@@ -14,4 +14,4 @@ jobs:
       uses: actions/checkout@v6.1.0
     - name : Build
       working-directory: ./hasanhuseyin.tr
-      run: docker build --build-arg VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }} -t hasanhuseyin.tr .
+      run: sudo docker build --build-arg VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }} -t hasanhuseyin.tr .
