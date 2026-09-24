@@ -15,7 +15,7 @@ jobs:
       working-directory: ./hasanhuseyin.tr
       run: sudo docker build --build-arg VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }} -t hasanhuseyin.tr .
     - name: Stop and Remove Old Container
-      run: 
+      run: |
         sudo docker stop hasanhuseyin.tr || true
         sudo docker rm hasanhuseyin.tr || true
     - name: Run Container
