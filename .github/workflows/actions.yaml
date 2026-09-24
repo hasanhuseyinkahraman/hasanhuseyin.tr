@@ -12,5 +12,6 @@ jobs:
     steps:
     - name : Checkout
       uses: actions/checkout@v6.1.0
-    - name: List contents of the repository
-      run: ls -A
+    - name : Build
+      working-directory: ./hasanhuseyin.tr
+      run: docker build --build-arg VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }} -t hasanhuseyin.tr .
