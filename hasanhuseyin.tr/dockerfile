@@ -1,12 +1,11 @@
-FROM node:24.21.0-alpine
-
+FROM node:24.21.0-alpine AS builder
 WORKDIR /app
-
 COPY package.json package-lock.json ./
-
-RUN npm install
-
-
-ENV YouTube_API_key=${YT_API_key}
-
+RUN npm ci
+ARG VITE_YOUTUBE_API_KEY
+ENV VITE_YOUTUBE_API_KEY=${VITE_YOUTUBE_API_KEY}
 COPY . .
+RUN npm run build
+FROM caddy:2.11.4-alpine
+COPY --from=builder /app/dist /usr/share/caddy
+EXPOSE 80
