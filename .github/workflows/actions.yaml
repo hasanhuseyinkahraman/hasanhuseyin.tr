@@ -8,10 +8,16 @@ on:
 jobs:
   test:
     runs-on: self-hosted
-
     steps:
     - name : Checkout
       uses: actions/checkout@v6.1.0
     - name : Build
       working-directory: ./hasanhuseyin.tr
       run: sudo docker build --build-arg VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }} -t hasanhuseyin.tr .
+    - name: Stop and Remove Old Container
+      run: 
+        sudo docker stop app-hasanhuseyin || true
+        sudo docker rm app-hasanhuseyin || true
+    - name: Run Container
+      run: 
+        sudo docker run -d -p 8080:80 --restart unless-stopped --name hasanhuseyin.tr hasanhuseyin.tr
